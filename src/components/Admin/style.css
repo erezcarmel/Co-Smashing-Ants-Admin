@@ -1,0 +1,103 @@
+.admin {
+    padding-top: 10px;
+}
+
+.admin .container {
+    background: #fffbf3;
+    padding: 10px;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5);
+}
+
+.admin label {
+    color: red;
+    font-size: 20px;
+}
+
+.admin .add-panel, .admin .game-time, .admin .server-url {
+    margin: 0 auto;
+}
+
+.admin .form-group {
+    padding: 10px;
+}
+
+.admin .form-group input {
+    font-family: 'Indie Flower', cursive !important;
+    margin-right: 10px;
+}
+
+.admin .form-group input.time {
+    width: 50px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.admin .form-group label {
+    padding-right: 10px;
+}
+
+.admin .server-url .form-group button {
+    font-size: 14px;
+}
+
+.admin .server-url .form-group input {
+    font-family: sans-serif !important;
+}
+
+.admin button {
+    border-radius: 35px;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.admin .dropdown button {
+    font-family: 'Indie Flower', cursive !important;
+    width: auto;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 0 10px;
+}
+
+.admin .dropdown .dropdown-menu {
+    min-width: 0;
+    left: 8px;
+}
+
+.admin table tbody tr th, .admin table tbody tr td, .admin table thead tr th {
+    border-top: none;
+}
+
+.admin table tbody tr td button {
+    padding: 0;
+}
+
+.admin table thead tr th {
+    border-bottom: 1px solid #292b2c;
+}
+
+.admin .controls-panel {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.admin .controls-panel button {
+    margin: 2px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.url-modal .modal-content .modal-header, .url-modal .modal-content .modal-footer {
+    border: none;
+}
+
+.url-modal .modal-footer button {
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    cursor: pointer;
+}

@@ -1,0 +1,16 @@
+.leaders {
+    padding-top: 10px;
+}
+
+.leaders label {
+    color: red;
+    font-size: 20px;
+}
+
+.leaders table tbody tr th, .leaders table tbody tr td, .leaders table thead tr th {
+    border-top: none;
+}
+
+.leaders table thead tr th {
+    border-bottom: 1px solid #292b2c;
+}
