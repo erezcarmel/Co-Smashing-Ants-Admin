@@ -1,0 +1,45 @@
+.navbar {
+	box-shadow: 2.9rem -2.5rem 2rem 2.5rem rgba(0, 0, 0, 1);
+	height: 45px;
+	color: black;
+	background: repeating-linear-gradient(
+		45deg,
+		rgba(255, 0, 0, 0.3),
+		rgba(255, 0, 0, 0.3) 10px,
+		#fff 10px,
+		#fff 20px
+	);
+}
+
+.navbar .navbar-brand {
+	font-size: 22px;
+}
+.navbar .navbar-brand span {
+	color: black;
+	font-weight: bold;
+
+	background-image: url('../../assets/ant.png');
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	padding-left: 30px
+}
+
+.navbar .nav-tabs {
+	border-bottom: none;
+}
+
+.navbar .nav-tabs .nav-item a {
+	cursor: pointer;
+	font-size: 14px;
+	color: black;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	margin-left: 10px;
+}
+
+.navbar .nav-tabs .nav-item a:hover {
+	text-decoration: none;
+	color: red;
+}
