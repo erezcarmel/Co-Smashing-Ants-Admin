@@ -38,8 +38,7 @@ class GameService {
 
 	list() {
 		// return new Promise(resolve => {
-		// 	resolve({
-		// 		data: [
+		// 	resolve([
 		// 			{
 		// 				"name":"teamA",
 		// 				"antSpecies": 1
@@ -52,11 +51,10 @@ class GameService {
 		// 				"name":"teamC",
 		// 				"antSpecies": 3
 		// 			}
-		// 		]
-		// 	});
+		// 		]);
 		// });
 
-		return axios.get(this.serverUrl + '/teams/getCurrentTeams');
+		return axios.get(this.serverUrl + '/teams/current');
 	}
 
 	species() {
@@ -79,7 +77,7 @@ class GameService {
 		// 	});
 		// });
 
-		return axios.get(this.serverUrl + '/games/getAllAntSpecies');
+		return axios.get(this.serverUrl + '/antspecies');
 	}
 
 	status() {
@@ -127,7 +125,7 @@ class GameService {
 		// 	})
 		// });
 
-		return axios.get(this.serverUrl + '/teams/getLeaderTeams');
+		return axios.get(this.serverUrl + '/teams/latest');
 	}
 
 	leaders() {

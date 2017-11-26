@@ -51,11 +51,15 @@ class Admin extends Component {
 		}
 
 		GameService.list().then(teams => {
+			console.log('loaded teams:', teams);
+
 			GameService.species().then(species => {
+				console.log('loaded species:', species);
+
 				this.setState({
-					teams: teams.data,
-					species: species.data,
-					selectedSpecie: species.data[0],
+					teams: teams,
+					species: species,
+					selectedSpecie: species[0],
 					url: GameService.getServer()
 				});
 			});
@@ -83,6 +87,8 @@ class Admin extends Component {
 	updateStatus() {
 		GameService.status()
 			.then(res => {
+				console.log('loaded games latest:', res);
+
 				this.setState({
 					isPlaying: res.status === 'STARTED',
 					isPaused: res.status === 'PAUSED'
@@ -151,9 +157,11 @@ class Admin extends Component {
 	createGame() {
 		GameService.create(this.state.teams, this.state.time)
 			.then(res => {
+				console.log('games created');
 				this.setState({isCreated: true});
 			})
 			.catch(e => {
+				console.log('games creation failed');
 				this.setState({isCreated: false});
 			});
 	}
