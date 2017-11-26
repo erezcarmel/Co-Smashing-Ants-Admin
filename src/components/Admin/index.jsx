@@ -57,9 +57,9 @@ class Admin extends Component {
 				console.log('loaded species:', species);
 
 				this.setState({
-					teams: teams,
-					species: species,
-					selectedSpecie: species[0],
+					teams: teams.data,
+					species: species.data,
+					selectedSpecie: species.data[0],
 					url: GameService.getServer()
 				});
 			});
