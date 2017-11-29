@@ -42,7 +42,8 @@ class Admin extends Component {
 			isPaused: false,
 			canCreated: true,
 			errorMessage: '',
-			urlModal: false
+			urlModal: false,
+			status: ''
 		};
 	}
 
@@ -93,7 +94,8 @@ class Admin extends Component {
 				this.setState({
 					isPlaying: res.data.state === 'STARTED' || res.data.state === 'PAUSED' || res.data.state === 'RESUMED',
 					isPaused: res.data.state === 'PAUSED',
-					canCreated: res.data.state === 'FINISHED' || res.data.state === 'STOPPED'
+					canCreated: res.data.state === 'FINISHED' || res.data.state === 'STOPPED',
+					status: res.data.state
 				});
 
 			})
@@ -193,6 +195,8 @@ class Admin extends Component {
 							<Button onClick={this.createGame.bind(this)} disabled={!this.state.canCreated} title="Save & Create game">
 								<i className="fa fa-save" aria-hidden="true"/>
 							</Button>
+
+							<Label className="game-status">Status: <span>{this.state.status}</span></Label>
 						</div>
 					</Row>
 

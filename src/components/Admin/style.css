@@ -85,8 +85,22 @@
 }
 
 .admin .controls-panel {
-    margin: 0 auto;
-    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.admin .controls-panel .game-status {
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
+
+.admin .controls-panel .game-status span {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: black;
 }
 
 .admin .controls-panel button {
