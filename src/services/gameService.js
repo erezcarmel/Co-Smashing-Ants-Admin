@@ -20,8 +20,8 @@ class GameService {
 		return axios.post(this.serverUrl + '/games?gameTime=' + time, data);
 	}
 
-	start(speed) {
-		return axios.put(this.serverUrl + '/games/start?stepsPerSecond=' + speed);
+	start(factor) {
+		return axios.put(this.serverUrl + '/games/start?factor=' + factor);
 	}
 
 	stop() {

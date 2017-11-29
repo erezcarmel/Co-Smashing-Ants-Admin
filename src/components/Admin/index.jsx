@@ -41,7 +41,6 @@ class Admin extends Component {
 			isPlaying: false,
 			isPaused: false,
 			canCreated: true,
-			errorMessage: '',
 			urlModal: false,
 			status: ''
 		};
@@ -89,8 +88,6 @@ class Admin extends Component {
 	updateStatus() {
 		GameService.status()
 			.then(res => {
-				// console.log('games state:', res.data.state);
-
 				this.setState({
 					isPlaying: res.data.state === 'STARTED' || res.data.state === 'PAUSED' || res.data.state === 'RESUMED',
 					isPaused: res.data.state === 'PAUSED',
@@ -100,7 +97,7 @@ class Admin extends Component {
 
 			})
 			.catch(err => {
-				this.setState({errorMessage: err.message});
+				this.setState({status: err.message});
 			});
 
 		this.timeout = setTimeout(this.updateStatus.bind(this), 1000);
@@ -244,7 +241,7 @@ class Admin extends Component {
 						<Col sm="8" className="add-panel">
 							{!this.state.isPlaying && <Form inline onSubmit={this.addTeam.bind(this)}>
 								<FormGroup>
-									<Label for="name">Team Name</Label>
+									<Label for="name">Add Team Name</Label>
 									<Input type="text" name="name" id="name" placeholder="Team name" onChange={this.handleChange.bind(this)}/>
 								</FormGroup>
 

@@ -22,6 +22,11 @@
     border-radius: 5px;
 }
 
+
+.admin .add-panel input#name::placeholder {
+    color: #ccc;
+}
+
 .admin .form-group {
     padding: 10px;
 }
@@ -29,12 +34,23 @@
 .admin .form-group input {
     font-family: 'Indie Flower', cursive !important;
     margin-right: 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid red;
+    border-radius: 0;
+    padding: 0;
+    font-weight: 100;
+}
+
+.admin .form-group input#url {
+    min-width: 250px;
 }
 
 .admin .form-group input.time, .admin .form-group input.speed {
     width: 50px;
-    padding: 10px 0;
     text-align: center;
+    font-size: 20px;
+    height: 20px;
 }
 
 .admin .form-group label {
@@ -89,13 +105,15 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px;
+    width: 200px;
+    text-align: center;
 }
 
 .admin .controls-panel .game-status {
     display: block;
     font-size: 12px;
-    text-align: center;
     margin: 0;
+    padding-top: 5px;
 }
 
 .admin .controls-panel .game-status span {

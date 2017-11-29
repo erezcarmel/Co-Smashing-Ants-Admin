@@ -1,6 +1,6 @@
 {
   "name": "smashing-ants",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "dependencies": {
     "autoprefixer": "7.1.6",
