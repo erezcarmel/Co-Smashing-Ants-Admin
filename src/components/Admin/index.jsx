@@ -30,16 +30,17 @@ class Admin extends Component {
 		super(props);
 
 		this.state = {
-			teams: [],
+			teams: JSON.parse(localStorage.getItem('teams')) || [],
 			species: [],
-			time: 0,
+			time: 1,
+			speed: 1,
 			speciesOpen: false,
 			selectedSpecie: {},
 			name: '',
 			url: '',
 			isPlaying: false,
 			isPaused: false,
-			isCreated: false,
+			canCreated: true,
 			errorMessage: '',
 			urlModal: false
 		};
@@ -57,7 +58,7 @@ class Admin extends Component {
 				console.log('loaded species:', species);
 
 				this.setState({
-					teams: teams.data,
+					teams: this.state.isPlaying ? teams.data : this.state.teams,
 					species: species.data,
 					selectedSpecie: species.data[0],
 					url: GameService.getServer()
@@ -87,11 +88,12 @@ class Admin extends Component {
 	updateStatus() {
 		GameService.status()
 			.then(res => {
-				console.log('loaded games latest:', res);
+				// console.log('games state:', res.data.state);
 
 				this.setState({
-					isPlaying: res.status === 'STARTED',
-					isPaused: res.status === 'PAUSED'
+					isPlaying: res.data.state === 'STARTED' || res.data.state === 'PAUSED' || res.data.state === 'RESUMED',
+					isPaused: res.data.state === 'PAUSED',
+					canCreated: res.data.state === 'FINISHED' || res.data.state === 'STOPPED'
 				});
 
 			})
@@ -109,6 +111,8 @@ class Admin extends Component {
 			antSpeciesId: this.state.selectedSpecie.id,
 			name: this.state.name
 		}];
+
+		localStorage.setItem('teams', JSON.stringify(teams));
 
 		this.setState({teams: teams});
 	}
@@ -142,7 +146,7 @@ class Admin extends Component {
 		if (this.state.isPlaying) {
 			GameService.stop();
 		} else {
-			GameService.start();
+			GameService.start(this.state.speed);
 		}
 	}
 
@@ -158,12 +162,16 @@ class Admin extends Component {
 		GameService.create(this.state.teams, this.state.time)
 			.then(res => {
 				console.log('games created');
-				this.setState({isCreated: true});
+				this.setState({canCreated: false});
 			})
 			.catch(e => {
 				console.log('games creation failed');
-				this.setState({isCreated: false});
+				this.setState({canCreated: true});
 			});
+	}
+
+	updateSpeed(speed) {
+		GameService.speed(this.state.speed);
 	}
 
 	render() {
@@ -174,15 +182,15 @@ class Admin extends Component {
 
 					<Row>
 						<div className="controls-panel">
-							<Button onClick={this.togglePause.bind(this)} disabled={!this.state.isPlaying}>
+							<Button onClick={this.togglePause.bind(this)} disabled={!this.state.isPlaying} title={`${this.state.isPaused ? 'Resume' : 'Pause'} game`}>
 								<i className={`fa fa-${this.state.isPaused ? 'repeat' : 'pause'}`} aria-hidden="true"/>
 							</Button>
 
-							<Button onClick={this.togglePlay.bind(this)} disabled={!this.state.isCreated}>
+							<Button onClick={this.togglePlay.bind(this)} disabled={this.state.canCreated} title={`${this.state.isPlaying ? 'Stop' : 'Play'} game`}>
 								<i className={`fa fa-${this.state.isPlaying ? 'stop' : 'play'}`} aria-hidden="true"/>
 							</Button>
 
-							<Button onClick={this.createGame.bind(this)} disabled={this.state.isCreated}>
+							<Button onClick={this.createGame.bind(this)} disabled={!this.state.canCreated} title="Save & Create game">
 								<i className="fa fa-save" aria-hidden="true"/>
 							</Button>
 						</div>
@@ -194,7 +202,7 @@ class Admin extends Component {
 								<FormGroup>
 									<Label for="url">Server URL</Label>
 									<Input type="text" name="url" id="url" value={this.state.url} onChange={this.handleChange.bind(this)}/>
-									<Button onClick={this.updateServerUrl.bind(this)}>
+									<Button onClick={this.updateServerUrl.bind(this)} title="Updated server url">
 										<i className="fa fa-save" aria-hidden="true"/>
 									</Button>
 								</FormGroup>
@@ -203,16 +211,30 @@ class Admin extends Component {
 					</Row>
 
 					{!this.state.isPlaying && <Row>
-						<Col sm="8" className="game-time">
+						<Col sm="8" className="game-params">
 							<Form inline>
 								<FormGroup>
 									<Label for="time">Game time</Label>
-									<Input type="number" name="time" id="time" className="time" defaultValue={this.state.time} onChange={this.handleChange.bind(this)}/>
+									<Input type="number" min="0.1" step="0.1" name="time" id="time" className="time" defaultValue={this.state.time} onChange={this.handleChange.bind(this)}/>
 									<Label>Minutes</Label>
 								</FormGroup>
 							</Form>
 						</Col>
 					</Row>}
+
+					<Row>
+						<Col sm="8" className="game-params">
+							<Form inline>
+								<FormGroup>
+									<Label for="speed">Game speed</Label>
+									<Input type="number" min="0.1" step="0.1" name="speed" id="speed" className="speed" defaultValue={this.state.speed} onChange={this.handleChange.bind(this)}/>
+									{this.state.isPlaying && <Button onClick={this.updateSpeed.bind(this)} title="Updated game speed">
+										<i className="fa fa-clock-o" aria-hidden="true"/>
+									</Button>}
+								</FormGroup>
+							</Form>
+						</Col>
+					</Row>
 
 					<Row>
 						<Col sm="8" className="add-panel">
@@ -243,7 +265,7 @@ class Admin extends Component {
 									</Dropdown>
 								</FormGroup>
 
-								<Button type="submit">
+								<Button type="submit"  title="Add team">
 									<i className="fa fa-plus" aria-hidden="true"/>
 								</Button>
 							</Form>}
