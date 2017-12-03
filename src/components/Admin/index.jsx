@@ -34,6 +34,7 @@ class Admin extends Component {
 			species: [],
 			time: 1,
 			speed: 1,
+			population: 5,
 			speciesOpen: false,
 			selectedSpecie: {},
 			name: '',
@@ -145,7 +146,7 @@ class Admin extends Component {
 		if (this.state.isPlaying) {
 			GameService.stop();
 		} else {
-			GameService.start(this.state.speed);
+			GameService.start(this.state.speed, this.state.population);
 		}
 	}
 
@@ -232,6 +233,17 @@ class Admin extends Component {
 									{this.state.isPlaying && <Button onClick={this.updateSpeed.bind(this)} title="Updated game speed">
 										<i className="fa fa-clock-o" aria-hidden="true"/>
 									</Button>}
+								</FormGroup>
+							</Form>
+						</Col>
+					</Row>
+
+					<Row>
+						<Col sm="8" className="game-params">
+							<Form inline>
+								<FormGroup>
+									<Label for="population">Population</Label>
+									<Input type="number" min="0" max="10" name="population" id="population" className="population" defaultValue={this.state.population} onChange={this.handleChange.bind(this)}/>
 								</FormGroup>
 							</Form>
 						</Col>

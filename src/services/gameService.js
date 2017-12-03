@@ -20,8 +20,8 @@ class GameService {
 		return axios.post(this.serverUrl + '/games?gameTime=' + time, data);
 	}
 
-	start(factor) {
-		return axios.put(this.serverUrl + '/games/start?factor=' + factor);
+	start(factor, population) {
+		return axios.put(this.serverUrl + '/games/start?factor=' + factor + '&population=' + population);
 	}
 
 	stop() {
@@ -149,7 +149,7 @@ class GameService {
 		// 			{
 		// 				"id": 11,
 		// 				"name": "Yanai",
-		// 				"score": Math.floor(Math.random() * 200) + 1
+		// 				"score": -10
 		// 			}
 		// 		]
 		// 	})

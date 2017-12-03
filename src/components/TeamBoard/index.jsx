@@ -4,7 +4,7 @@ import {
 	Label
 } from 'reactstrap';
 import { browserHistory } from 'react-router';
-import { BarChart, Bar, XAxis, Tooltip} from 'recharts';
+import { BarChart, Bar, XAxis, Tooltip, ReferenceLine} from 'recharts';
 import GameService from '../../services/gameService';
 
 import './style.css';
@@ -36,7 +36,7 @@ class TeamBoard extends Component {
 				teams: res.data
 			});
 		});
-		this.timeout = setTimeout(this.updateScores.bind(this), 1000,);
+		this.timeout = setTimeout(this.updateScores.bind(this), 1000);
 	}
 
 	render() {
@@ -64,6 +64,7 @@ class TeamBoard extends Component {
 							<rect x="0" y="0" width="100%" height="100%" fill="url(#pattern-stripe)" />
 						</mask>
 
+						<ReferenceLine y={0} />
 						<Tooltip />
 						<XAxis dataKey="name" axisLine={false} tickLine={false}/>
 						<Bar dataKey="score" fill="#f00" label={{ fontSize: 18 }} shape={<CandyBar />} />
