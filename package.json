@@ -52,7 +52,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "create-react-class": "^15.6.2",
     "react-router": "^2.8.1",
     "reactstrap": "^4.8.0",
